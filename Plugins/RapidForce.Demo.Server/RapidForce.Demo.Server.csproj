@@ -4,18 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProjectGuid>{880C18BD-CB08-48FA-B7B1-B9D49C1175D2}</ProjectGuid>
+    <ProjectGuid>{2D70B694-3C30-4CD3-B349-A2BC3FD4129F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RapidForce</RootNamespace>
-    <AssemblyName>RapidForce.Server.net</AssemblyName>
+    <RootNamespace>RapidForce.Demo</RootNamespace>
+    <AssemblyName>RapidForce.Demo.Server.net</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\resources\rapid-force-debug\</OutputPath>
+    <OutputPath>..\..\resources\rapid-force-demo-debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>embedded</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -24,7 +24,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\resources\rapid-force\</OutputPath>
+    <OutputPath>..\..\resources\rapid-force-demo\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>embedded</DebugType>
@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CitizenFX.Core.Server, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\CitizenFX.Core.Server.1.0.2315\lib\net45\CitizenFX.Core.Server.dll</HintPath>
+      <HintPath>..\..\packages\CitizenFX.Core.Server.1.0.2315\lib\net45\CitizenFX.Core.Server.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -49,20 +49,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Plugin.cs" />
-    <Compile Include="PluginRegistry.cs" />
-    <Compile Include="Script.cs" />
+    <Compile Include="Demo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RapidForce\RapidForce.csproj">
+    <ProjectReference Include="..\..\RapidForce.Server\RapidForce.Server.csproj">
+      <Project>{880c18bd-cb08-48fa-b7b1-b9d49c1175d2}</Project>
+      <Name>RapidForce.Server</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RapidForce\RapidForce.csproj">
       <Project>{66ad0b99-34cc-4224-b52f-3a8f388d4912}</Project>
       <Name>RapidForce</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\RapidForce.Demo\RapidForce.Demo.csproj">
+      <Project>{edccc36b-bdf1-4e9e-9b45-e217315d4c8d}</Project>
+      <Name>RapidForce.Demo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
