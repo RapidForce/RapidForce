@@ -7,13 +7,13 @@ namespace RapidForce
 {
     internal class PluginRegistry
     {
-        public IEnumerable<PluginAttribute> Plugins => plugins.Values;
+        public IEnumerable<PluginRegistration> Plugins => plugins.Values;
 
-        private readonly IDictionary<string, PluginAttribute> plugins = new Dictionary<string, PluginAttribute>();
+        private readonly IDictionary<string, PluginRegistration> plugins = new Dictionary<string, PluginRegistration>();
 
         public PluginRegistry(Script script)
         {
-            script.EventHandlers.Add("rf:RegisterPlugin", new Action<dynamic, CallbackDelegate>(Register));
+            script.EventHandlers.Add(Event.Server.RegisterPlugin, new Action<dynamic, CallbackDelegate>(Register));
         }
 
         private void Register(dynamic info, CallbackDelegate errors)
@@ -24,18 +24,13 @@ namespace RapidForce
                 return;
             }
 
-            if (plugins.Contains(info.Assembly))
+            if (plugins.ContainsKey(info.Assembly))
             {
                 errors.Invoke("already registered");
                 return;
             }
 
-            plugins[info.Assembly] = new PluginAttribute()
-            {
-                Name = info.Name,
-            };
-
-            Debug.WriteLine($"Registered plugin {info.Assembly}");
+            plugins[info.Assembly] = new PluginRegistration(info.Assembly, info.Title);
         }
     }
 }

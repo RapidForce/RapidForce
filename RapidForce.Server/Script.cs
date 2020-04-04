@@ -13,5 +13,10 @@ namespace RapidForce
         {
             registry = new PluginRegistry(this);
         }
+
+        public void AddHandler(string eventName, Delegate handler)
+        {
+            EventHandlers[eventName] += handler;
+        }
     }
 }

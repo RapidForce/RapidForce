@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
+using System.Reflection;
 using CitizenFX.Core;
 
 namespace RapidForce
@@ -12,17 +13,15 @@ namespace RapidForce
             Type type = GetType();
 
             dynamic info = new ExpandoObject();
-            info.Assembly = type.Assembly.GetName().FullName;
-            info.Version = type.Assembly.GetName().Version.ToString();
+            info.Assembly = type.Assembly.GetName().ToString();
 
-            object[] attrs = type.GetCustomAttributes(typeof(PluginAttribute), true);
-            if (attrs.Length > 0)
+            var attr = type.Assembly.GetCustomAttributes(typeof(AssemblyTitleAttribute)).SingleOrDefault() as AssemblyTitleAttribute;
+            if (!string.IsNullOrWhiteSpace(attr?.Title))
             {
-                var p = attrs[0] as PluginAttribute;
-                info.Name = p.Name;
+                info.Title = attr?.Title;
             }
 
-            TriggerEvent("rf:RegisterPlugin", info, new Action<string>((error) => throw new Exception(error)));
+            TriggerEvent(Event.Server.RegisterPlugin, info, new Action<string>((error) => throw new Exception(error)));
         }
     }
 }
