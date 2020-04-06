@@ -17,6 +17,7 @@ jobs:
     - name: Build the solution
       run: msbuild RapidForce.sln
     - name: Upload artifacts
+      uses: actions/upload-artifact@v1
       with:
         name: resources
         path: resources/
