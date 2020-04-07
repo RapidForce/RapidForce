@@ -4,12 +4,13 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using CitizenFX.Core;
+using CitizenFX.Core.Native;
 
 namespace RapidForce
 {
     public abstract class Plugin : BaseScript
     {
-        public static List<Pursuit> ActivePursuits { get; private set; }
+        public List<Pursuit> ActivePursuits { get; private set; }
 
         protected Plugin()
         {
@@ -33,17 +34,18 @@ namespace RapidForce
         /// <param name="clientId">The pursuing client's ID.</param>
         /// <param name="localId">AI (local) ID being pursued.</param>
         /// <returns></returns>
-        public static Pursuit Pursuit(int clientId, int localId) => new Pursuit(clientId, localId);
-        public static void StartPursuit(Pursuit pursuit)
+        public Pursuit Pursuit(int clientId, int localId) => new Pursuit(clientId, localId);
+        public void StartPursuit(Pursuit pursuit)
         {
             ActivePursuits.Add(pursuit);
             Script.Log($"Adding active pursuit {pursuit.LocalId}");
+            Players[pursuit.ClientId].TriggerEvent(Event.Client.StartPursuit, pursuit);
         }
-        public static void UpdatePursuit(Pursuit pursuit)
+        public void UpdatePursuit(Pursuit pursuit)
         {
 
         }
-        public static void StopPursuit(Pursuit pursuit)
+        public void StopPursuit(Pursuit pursuit)
         {
             if (ActivePursuits.Remove(pursuit))
             {
@@ -51,6 +53,7 @@ namespace RapidForce
                 return;
             }
             Script.Log($"Failed to remove pursuit {pursuit.LocalId}");
+            Players[pursuit.ClientId].TriggerEvent(Event.Client.StopPursuit, pursuit);
         }
     }
 }
