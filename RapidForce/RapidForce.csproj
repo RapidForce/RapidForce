@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallAttribute.cs" />
+    <Compile Include="ICall.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Models\Pursuit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

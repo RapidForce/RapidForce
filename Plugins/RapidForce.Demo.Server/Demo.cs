@@ -1,4 +1,5 @@
 ﻿using System;
+using CitizenFX.Core;
 
 namespace RapidForce.Demo
 {
@@ -6,7 +7,7 @@ namespace RapidForce.Demo
     {
         public Demo()
         {
-
+            RegisterCall(typeof(PursuitInProgress));
         }
     }
 }
