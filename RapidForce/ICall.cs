@@ -4,10 +4,15 @@ namespace RapidForce
 {
     public interface ICall
     {
-        void Accept();
+        /// <summary>
+        /// Start is called when the call has been accepted.
+        /// </summary>
+        void Start();
 
-        void Deny();
-
+        /// <summary>
+        /// End is called when the call has ended.
+        /// This method should clean up anything the call spawned or created.
+        /// </summary>
         void End();
     }
 }

@@ -4,10 +4,8 @@ namespace RapidForce
 {
     public abstract class Call : ICall
     {
-        public virtual void Accept() { }
+        public abstract void Start();
 
-        public virtual void Deny() { }
-
-        public virtual void End() { }
+        public abstract void End();
     }
 }

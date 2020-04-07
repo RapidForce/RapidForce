@@ -10,8 +10,5 @@ namespace RapidForce.Demo
     internal class PursuitInProgress : Call
     {
 
-        public override void Accept()
-        {
-        }
     }
 }

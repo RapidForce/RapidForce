@@ -9,9 +9,8 @@ namespace RapidForce
 {
     public abstract class Plugin : BaseScript
     {
-        protected event Action<ICall> CallReceived;
-
         private int id;
+        private Call call;
 
         private readonly IDictionary<string, Type> calls = new Dictionary<string, Type>();
 
@@ -39,23 +38,44 @@ namespace RapidForce
             }
             this.id = id;
 
-            AddPluginHandler(Event.Server.Plugin.CallReceived, new Action<string>(CreateCall));
+            AddPluginHandler(Event.Server.Plugin.CallStart, new Action<string, CallbackDelegate>(CreateAndStartCall));
+            AddPluginHandler(Event.Server.Plugin.CallEnd, new Action<CallbackDelegate>(EndCall));
+        }
+
+        private void CreateAndStartCall(string name, CallbackDelegate callback)
+        {
+            if (!calls.TryGetValue(name, out Type t))
+            {
+                callback.Invoke(false);
+                return;
+            }
+            try
+            {
+                call = (Call)Activator.CreateInstance(t);
+                call.Start();
+            }
+            catch (Exception ex)
+            {
+                callback.Invoke(false);
+                throw new Exception("Could not create and start call", ex);
+            }
+            callback.Invoke(true);
+        }
+
+        private void EndCall(CallbackDelegate callback)
+        {
+            if (call == null)
+            {
+                callback.Invoke(false);
+                return;
+            }
+            call.End();
+            callback.Invoke(true);
         }
 
         public void AddPluginHandler(string name, Delegate d)
         {
             EventHandlers[Event.Plugin(id) + name] += d;
-        }
-
-        private void CreateCall(string name)
-        {
-            Type t;
-            if (!calls.TryGetValue(name, out t))
-            {
-                return;
-            }
-            var call = (ICall)Activator.CreateInstance(t);
-            CallReceived?.Invoke(call);
         }
 
         protected void RegisterCall(Type type)

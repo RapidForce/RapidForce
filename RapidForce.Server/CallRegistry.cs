@@ -13,6 +13,8 @@ namespace RapidForce
 
         private readonly Script script;
 
+        public Entry this[string name] => calls[name];
+
         public CallRegistry(Script script)
         {
             this.script = script;

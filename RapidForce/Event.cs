@@ -18,7 +18,9 @@ namespace RapidForce
             {
                 public const string Load = "Load";
 
-                public const string CallReceived = "CallReceived";
+                public const string CallStart = "CallStart";
+
+                public const string CallEnd = "CallEnd";
             }
         }
     }
