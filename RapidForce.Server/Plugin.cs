@@ -27,6 +27,12 @@ namespace RapidForce
             TriggerEvent(Event.Server.RegisterPlugin, info, new Action<string>((error) => throw new Exception(error)));
         }
 
+        /// <summary>
+        /// Create a new pursuit instance.
+        /// </summary>
+        /// <param name="clientId">The pursuing client's ID.</param>
+        /// <param name="localId">AI (local) ID being pursued.</param>
+        /// <returns></returns>
         public static Pursuit Pursuit(int clientId, int localId) => new Pursuit(clientId, localId);
         public static void StartPursuit(Pursuit pursuit)
         {
