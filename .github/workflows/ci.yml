@@ -1,0 +1,27 @@
+name: RapidForce Builder
+
+on:
+  push:
+    branches:
+      - master
+      - feature/ci
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Restore packages
+      run: nuget restore RapidForce.sln
+    - name: Build the solution
+      run: msbuild RapidForce.sln
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: resources
+        path: resources/
