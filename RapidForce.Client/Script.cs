@@ -9,5 +9,9 @@ namespace RapidForce
 {
     public class Script : BaseScript
     {
+        public static void Log(string data)
+        {
+            Debug.WriteLine($"[RAPID FORCE]: {data}");
+        }
     }
 }

@@ -18,5 +18,10 @@ namespace RapidForce
         {
             EventHandlers[eventName] += handler;
         }
+
+        public static void Log(string data)
+        {
+            Debug.WriteLine($"[RAPID FORCE]: {data}");
+        }
     }
 }
