@@ -42,9 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallAttribute.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="ICall.cs" />
     <Compile Include="Event.cs" />
-    <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Pursuit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

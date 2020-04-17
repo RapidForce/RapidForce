@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Call.cs" />
     <Compile Include="CallRegistry.cs" />
+    <Compile Include="Models\Persona.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginRegistry.cs" />
     <Compile Include="Script.cs" />
