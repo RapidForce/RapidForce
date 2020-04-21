@@ -11,6 +11,8 @@ namespace RapidForce
 
         public CallRegistry Calls { get; }
 
+        public ModelCollection<Pursuit> Pursuits { get; }
+
         public new EventHandlerDictionary EventHandlers => base.EventHandlers;
 
         public static readonly Random Random = new Random();
@@ -21,6 +23,7 @@ namespace RapidForce
         {
             Plugins = new PluginRegistry(this);
             Calls = new CallRegistry(this);
+            Pursuits = new ModelCollection<Pursuit>(this, "pursuit");
 
 #if DEBUG
             API.RegisterCommand("start_call", new Action<int, List<object>, string>((int source, List<object> args, string rawCommand) =>

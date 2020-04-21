@@ -44,6 +44,8 @@
     <Compile Include="CallAttribute.cs" />
     <Compile Include="ICall.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="IModelCollection.cs" />
     <Compile Include="Models\Pursuit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

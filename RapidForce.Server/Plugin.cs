@@ -10,7 +10,7 @@ namespace RapidForce
 {
     public abstract class Plugin : BaseScript
     {
-        public List<Pursuit> ActivePursuits { get; private set; }
+        private IModelCollection<Pursuit> Pursuits { get; } = new RemoteModelCollection<Pursuit>("Pursuits");
 
         private int id;
         private Call call;
@@ -106,34 +106,6 @@ namespace RapidForce
                 }
                 calls[attr.Name] = type;
             }));
-        }
-
-        /// <summary>
-        /// Create a new pursuit instance.
-        /// </summary>
-        /// <param name="clientId">The pursuing client's ID.</param>
-        /// <param name="localId">AI (local) ID being pursued.</param>
-        /// <returns></returns>
-        public Pursuit Pursuit(int clientId, int localId) => new Pursuit(clientId, localId);
-        public void StartPursuit(Pursuit pursuit)
-        {
-            ActivePursuits.Add(pursuit);
-            Script.Log($"Adding active pursuit {pursuit.LocalId}");
-            Players[pursuit.ClientId].TriggerEvent(Event.Client.StartPursuit, pursuit);
-        }
-        public void UpdatePursuit(Pursuit pursuit)
-        {
-
-        }
-        public void StopPursuit(Pursuit pursuit)
-        {
-            if (ActivePursuits.Remove(pursuit))
-            {
-                Script.Log($"Successfully removed pursuit {pursuit.LocalId}");
-                return;
-            }
-            Script.Log($"Failed to remove pursuit {pursuit.LocalId}");
-            Players[pursuit.ClientId].TriggerEvent(Event.Client.StopPursuit, pursuit);
         }
     }
 }

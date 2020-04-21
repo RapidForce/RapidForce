@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Call.cs" />
     <Compile Include="Plugin.cs" />
+    <Compile Include="RemoteModelCollection.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -51,8 +51,10 @@
   <ItemGroup>
     <Compile Include="Call.cs" />
     <Compile Include="CallRegistry.cs" />
+    <Compile Include="ModelCollection.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginRegistry.cs" />
+    <Compile Include="RemoteModelCollection.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
